@@ -1,0 +1,18 @@
+name: terraform-monorepo-action
+description: Returns paths to Terraform modules.
+author: DREST LTD
+inputs:
+  token:
+    description: GitHub token. Defaults to secrets.GITHUB_TOKEN.
+    required: false
+    default: ${{ github.token }}
+  mode:
+    description: Set to `all` to return all modules or `changed` to only return modules that have changes in this PR/commit. Defaults to `changed`.
+    required: false
+    default: changed
+outputs:
+  modules:
+    description: An array of paths to Terraform modules.
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
