@@ -6,6 +6,8 @@ async function run(): Promise<void> {
   try {
     const token = core.getInput('token', { required: true })
     const mode = core.getInput('mode', { required: true })
+    const ignore = core.getInput('ignore')
+    const include = core.getInput('include')
 
     let modules: string[]
 
@@ -20,6 +22,16 @@ async function run(): Promise<void> {
 
       default:
         throw new Error(`Unknown mode: ${mode}`)
+    }
+
+    if (ignore) {
+      const list = ignore.split(',').map((item) => item.trim())
+      modules = modules.filter((module) => !list.includes(module))
+    }
+
+    if (include) {
+      const list = include.split(',').map((item) => item.trim())
+      modules = modules.filter((module) => list.includes(module))
     }
 
     if (modules.length) {
