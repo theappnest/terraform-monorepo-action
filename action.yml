@@ -10,6 +10,12 @@ inputs:
     description: Set to `all` to return all modules or `changed` to only return modules that have changes in this PR/commit. Defaults to `changed`.
     required: false
     default: changed
+  ignore:
+    description: Comma-separated list of module paths to ignore.
+    required: false
+  include:
+    description: Comma-separated list of module paths to include. If set all other modules are ignored.
+    required: false
 outputs:
   modules:
     description: An array of paths to Terraform modules.
