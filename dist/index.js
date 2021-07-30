@@ -19,37 +19,34 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getAllModules = void 0;
 const github_1 = __nccwpck_require__(5438);
 const http_status_codes_1 = __nccwpck_require__(2828);
+const utils_1 = __nccwpck_require__(918);
 function getAllModules(token) {
-    var _a, _b, _c;
+    var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {
         const octokit = github_1.getOctokit(token);
-        let tree_sha;
+        let head;
         switch (github_1.context.eventName) {
             case 'pull_request':
-                tree_sha = (_b = (_a = github_1.context.payload.pull_request) === null || _a === void 0 ? void 0 : _a.head) === null || _b === void 0 ? void 0 : _b.sha;
+                head = (_b = (_a = github_1.context.payload.pull_request) === null || _a === void 0 ? void 0 : _a.head) === null || _b === void 0 ? void 0 : _b.sha;
                 break;
             case 'push':
-                tree_sha = github_1.context.payload.after;
+                head = github_1.context.payload.after;
                 break;
+            default:
+                throw new Error(`Unsupported event: ${github_1.context.eventName}`);
         }
-        if (!tree_sha) {
+        if (!head) {
             throw new Error('Ref not found');
         }
         const response = yield octokit.rest.git.getTree({
             owner: github_1.context.repo.owner,
             repo: github_1.context.repo.repo,
-            tree_sha,
+            tree_sha: head,
         });
         if (response.status !== 200) {
             throw new Error(http_status_codes_1.getReasonPhrase(response.status));
         }
-        const modules = (_c = response.data.tree) === null || _c === void 0 ? void 0 : _c.reduce((paths, { path }) => {
-            if (path === null || path === void 0 ? void 0 : path.endsWith('.tf')) {
-                paths.push(path.substring(0, path.lastIndexOf('/')));
-            }
-            return paths;
-        }, []);
-        return Array.from(new Set(modules));
+        return utils_1.getModulePaths(response.data.tree, 'path');
     });
 }
 exports.getAllModules = getAllModules;
@@ -75,8 +72,10 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getChangedModules = void 0;
 const github_1 = __nccwpck_require__(5438);
 const http_status_codes_1 = __nccwpck_require__(2828);
+const allModules_1 = __nccwpck_require__(1186);
+const utils_1 = __nccwpck_require__(918);
 function getChangedModules(token) {
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d;
     return __awaiter(this, void 0, void 0, function* () {
         const octokit = github_1.getOctokit(token);
         let base;
@@ -90,6 +89,8 @@ function getChangedModules(token) {
                 base = github_1.context.payload.before;
                 head = github_1.context.payload.after;
                 break;
+            default:
+                throw new Error(`Unsupported event: ${github_1.context.eventName}`);
         }
         if (!base || !head) {
             throw new Error('Refs not found');
@@ -106,13 +107,10 @@ function getChangedModules(token) {
         if (response.data.status !== 'ahead') {
             throw new Error(`HEAD ${response.data.status}`);
         }
-        const modules = (_e = response.data.files) === null || _e === void 0 ? void 0 : _e.reduce((paths, { filename }) => {
-            if (filename.endsWith('.tf')) {
-                paths.push(filename.substring(0, filename.lastIndexOf('/')));
-            }
-            return paths;
-        }, []);
-        return Array.from(new Set(modules));
+        const changedModules = utils_1.getModulePaths(response.data.files, 'filename');
+        const allModules = yield allModules_1.getAllModules(token);
+        // filter to exclude deleted modules
+        return changedModules.filter((module) => allModules.includes(module));
     });
 }
 exports.getChangedModules = getChangedModules;
@@ -155,8 +153,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
-const changedModules_1 = __nccwpck_require__(1013);
 const allModules_1 = __nccwpck_require__(1186);
+const changedModules_1 = __nccwpck_require__(1013);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -181,6 +179,28 @@ function run() {
     });
 }
 run();
+
+
+/***/ }),
+
+/***/ 918:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getModulePaths = void 0;
+function getModulePaths(files, pathProp) {
+    const result = files === null || files === void 0 ? void 0 : files.reduce((paths, file) => {
+        const path = file[pathProp];
+        if (path.endsWith('.tf')) {
+            paths.push(path.substring(0, path.lastIndexOf('/')));
+        }
+        return paths;
+    }, []);
+    return Array.from(new Set(result));
+}
+exports.getModulePaths = getModulePaths;
 
 
 /***/ }),
