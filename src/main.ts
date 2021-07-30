@@ -22,6 +22,12 @@ async function run(): Promise<void> {
         throw new Error(`Unknown mode: ${mode}`)
     }
 
+    if (modules.length) {
+      core.debug(`Found modules:${modules.map((module) => `\n- ${module}`)}`)
+    } else {
+      core.debug('No modules found')
+    }
+
     core.setOutput('modules', modules)
   } catch (error) {
     core.setFailed(error.message)

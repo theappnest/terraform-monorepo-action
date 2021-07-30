@@ -2,13 +2,14 @@ name: Test & Build
 
 on:
   pull_request:
-  push:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - run: yarn
       - run: yarn lint
       - run: yarn build
@@ -16,3 +17,5 @@ jobs:
         with:
           commit_message: 'chore: build'
           commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          commit_user_name: github-actions[bot]
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com>
