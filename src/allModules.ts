@@ -1,5 +1,6 @@
 import { context, getOctokit } from '@actions/github'
 import { getReasonPhrase } from 'http-status-codes'
+import { getModulePaths } from './utils'
 
 export async function getAllModules(token: string): Promise<string[]> {
   const octokit = getOctokit(token)
@@ -31,12 +32,5 @@ export async function getAllModules(token: string): Promise<string[]> {
     throw new Error(getReasonPhrase(response.status))
   }
 
-  const modules = response.data.tree?.reduce<string[]>((paths, { path }) => {
-    if (path?.endsWith('.tf')) {
-      paths.push(path.substring(0, path.lastIndexOf('/')))
-    }
-    return paths
-  }, [])
-
-  return Array.from(new Set(modules))
+  return getModulePaths(response.data.tree, 'path')
 }

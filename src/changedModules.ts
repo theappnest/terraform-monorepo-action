@@ -1,5 +1,7 @@
 import { context, getOctokit } from '@actions/github'
 import { getReasonPhrase } from 'http-status-codes'
+import { getAllModules } from './allModules'
+import { getModulePaths } from './utils'
 
 export async function getChangedModules(token: string): Promise<string[]> {
   const octokit = getOctokit(token)
@@ -39,15 +41,9 @@ export async function getChangedModules(token: string): Promise<string[]> {
     throw new Error(`HEAD ${response.data.status}`)
   }
 
-  const modules = response.data.files?.reduce<string[]>(
-    (paths, { filename }) => {
-      if (filename.endsWith('.tf')) {
-        paths.push(filename.substring(0, filename.lastIndexOf('/')))
-      }
-      return paths
-    },
-    [],
-  )
+  const changedModules = getModulePaths(response.data.files, 'filename')
+  const allModules = await getAllModules(token)
 
-  return Array.from(new Set(modules))
+  // filter to exclude deleted modules
+  return changedModules.filter((module) => allModules.includes(module))
 }
