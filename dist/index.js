@@ -42,6 +42,7 @@ function getAllModules(token) {
             owner: github_1.context.repo.owner,
             repo: github_1.context.repo.repo,
             tree_sha: head,
+            recursive: 'true',
         });
         if (response.status !== 200) {
             throw new Error(http_status_codes_1.getReasonPhrase(response.status));
@@ -170,6 +171,12 @@ function run() {
                     break;
                 default:
                     throw new Error(`Unknown mode: ${mode}`);
+            }
+            if (modules.length) {
+                core.debug(`Found modules:${modules.map((module) => `\n- ${module}`)}`);
+            }
+            else {
+                core.debug('No modules found');
             }
             core.setOutput('modules', modules);
         }
