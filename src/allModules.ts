@@ -26,6 +26,7 @@ export async function getAllModules(token: string): Promise<string[]> {
     owner: context.repo.owner,
     repo: context.repo.repo,
     tree_sha: head,
+    recursive: 'true',
   })
 
   if (response.status !== 200) {
