@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.1.1...v1.2.0) (2021-08-02)
+
+
+### Features
+
+* support ignore/include modules ([#12](https://www.github.com/theappnest/terraform-monorepo-action/issues/12)) ([c6a2069](https://www.github.com/theappnest/terraform-monorepo-action/commit/c6a2069b772bd9b2461e5bfa0d553665591cb7f1))
+
 ### [1.1.1](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.1.0...v1.1.1) (2021-07-30)
 
 
