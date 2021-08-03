@@ -1,4 +1,5 @@
 import * as core from '@actions/core'
+import ignore from 'ignore'
 import { getAllModules } from './allModules'
 import { getChangedModules } from './changedModules'
 
@@ -6,8 +7,7 @@ async function run(): Promise<void> {
   try {
     const token = core.getInput('token', { required: true })
     const mode = core.getInput('mode', { required: true })
-    const ignore = core.getInput('ignore')
-    const include = core.getInput('include')
+    const ignored = core.getInput('ignore')
 
     let modules: string[]
 
@@ -24,14 +24,9 @@ async function run(): Promise<void> {
         throw new Error(`Unknown mode: ${mode}`)
     }
 
-    if (ignore) {
-      const list = ignore.split(',').map((item) => item.trim())
-      modules = modules.filter((module) => !list.includes(module))
-    }
-
-    if (include) {
-      const list = include.split(',').map((item) => item.trim())
-      modules = modules.filter((module) => list.includes(module))
+    if (ignored) {
+      const globs = ignored.split('\n').map((item) => item.trim())
+      modules = ignore().add(globs).filter(modules)
     }
 
     if (modules.length) {

@@ -11,6 +11,10 @@ jobs:
     steps:
       - uses: theappnest/terraform-monorepo-action@master
         id: modules
+        ignore: |
+          */*
+          !modules/**
+          modules/ignored/*
     outputs:
       modules: ${{ steps.modules.outputs.modules }}
 
@@ -34,8 +38,7 @@ jobs:
 
 - `token` (optional) GitHub token. Defaults to secrets.GITHUB_TOKEN.
 - `mode` (optional) Set to `all` to return all modules or `changed` to only return modules that have changes in this PR/commit. Defaults to `changed`.
-- `ignore` (optional) Comma-separated list of module paths to ignore.
-- `include` (optional) Comma-separated list of module paths to include. If set all other modules are ignored.
+- `ignore` (optional) List of module path globs to ignore. Uses gitignore spec.
 
 ## Outputs
 
