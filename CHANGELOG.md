@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.2.0...v1.3.0) (2021-08-03)
+
+
+### Features
+
+* improved ignore ([#19](https://www.github.com/theappnest/terraform-monorepo-action/issues/19)) ([3a206a1](https://www.github.com/theappnest/terraform-monorepo-action/commit/3a206a127a673d027e7e694eab0220e2ba3ce226))
+
 ## [1.2.0](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.1.1...v1.2.0) (2021-08-02)
 
 
