@@ -11,10 +11,7 @@ inputs:
     required: false
     default: changed
   ignore:
-    description: Comma-separated list of module paths to ignore.
-    required: false
-  include:
-    description: Comma-separated list of module paths to include. If set all other modules are ignored.
+    description: List of module path globs to ignore. Uses gitignore spec.
     required: false
 outputs:
   modules:
