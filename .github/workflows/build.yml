@@ -11,6 +11,7 @@ jobs:
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - run: yarn
+      - run: yarn tsc
       - run: yarn lint
       - run: yarn build
       - uses: stefanzweifel/git-auto-commit-action@v4
