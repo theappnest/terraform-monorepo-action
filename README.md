@@ -11,10 +11,11 @@ jobs:
     steps:
       - uses: theappnest/terraform-monorepo-action@master
         id: modules
-        ignore: |
-          */*
-          !modules/**
-          modules/ignored/*
+        with:
+          ignore: |
+            */*
+            !modules/**
+            modules/ignored/*
     outputs:
       modules: ${{ steps.modules.outputs.modules }}
 
