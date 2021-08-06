@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.3.0...v1.4.0) (2021-08-06)
+
+
+### Features
+
+* support workflow dispatch event ([#26](https://www.github.com/theappnest/terraform-monorepo-action/issues/26)) ([6c9ee72](https://www.github.com/theappnest/terraform-monorepo-action/commit/6c9ee7211dc8909af881f9224166124bd6a072af))
+
 ## [1.3.0](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.2.0...v1.3.0) (2021-08-03)
 
 
