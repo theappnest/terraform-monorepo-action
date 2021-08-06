@@ -2,14 +2,22 @@ name: Test & Build
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]') ||
+      (github.event_name != 'pull_request_target' && github.actor != 'dependabot[bot]')
     steps:
       - uses: actions/checkout@v2
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
       - run: yarn
       - run: yarn tsc
       - run: yarn lint
