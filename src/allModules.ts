@@ -1,26 +1,11 @@
 import { context, getOctokit } from '@actions/github'
 import { getReasonPhrase } from 'http-status-codes'
-import { getModulePaths } from './utils'
+import { getModulePaths, getSha } from './utils'
 
 export async function getAllModules(token: string): Promise<string[]> {
   const octokit = getOctokit(token)
 
-  let head: string | undefined
-
-  switch (context.eventName) {
-    case 'pull_request':
-      head = context.payload.pull_request?.head?.sha
-      break
-    case 'push':
-      head = context.payload.after
-      break
-    default:
-      throw new Error(`Unsupported event: ${context.eventName}`)
-  }
-
-  if (!head) {
-    throw new Error('Ref not found')
-  }
+  const { head } = await getSha(token)
 
   const response = await octokit.rest.git.getTree({
     owner: context.repo.owner,

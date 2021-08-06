@@ -1,30 +1,12 @@
 import { context, getOctokit } from '@actions/github'
 import { getReasonPhrase } from 'http-status-codes'
 import { getAllModules } from './allModules'
-import { getModulePaths } from './utils'
+import { getModulePaths, getSha } from './utils'
 
 export async function getChangedModules(token: string): Promise<string[]> {
   const octokit = getOctokit(token)
 
-  let base: string | undefined
-  let head: string | undefined
-
-  switch (context.eventName) {
-    case 'pull_request':
-      base = context.payload.pull_request?.base?.sha
-      head = context.payload.pull_request?.head?.sha
-      break
-    case 'push':
-      base = context.payload.before
-      head = context.payload.after
-      break
-    default:
-      throw new Error(`Unsupported event: ${context.eventName}`)
-  }
-
-  if (!base || !head) {
-    throw new Error('Refs not found')
-  }
+  const { base, head } = await getSha(token)
 
   const response = await octokit.rest.repos.compareCommits({
     base,
