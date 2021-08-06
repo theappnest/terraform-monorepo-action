@@ -21,23 +21,9 @@ const github_1 = __nccwpck_require__(5438);
 const http_status_codes_1 = __nccwpck_require__(2828);
 const utils_1 = __nccwpck_require__(918);
 function getAllModules(token) {
-    var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {
         const octokit = github_1.getOctokit(token);
-        let head;
-        switch (github_1.context.eventName) {
-            case 'pull_request':
-                head = (_b = (_a = github_1.context.payload.pull_request) === null || _a === void 0 ? void 0 : _a.head) === null || _b === void 0 ? void 0 : _b.sha;
-                break;
-            case 'push':
-                head = github_1.context.payload.after;
-                break;
-            default:
-                throw new Error(`Unsupported event: ${github_1.context.eventName}`);
-        }
-        if (!head) {
-            throw new Error('Ref not found');
-        }
+        const { head } = yield utils_1.getSha(token);
         const response = yield octokit.rest.git.getTree({
             owner: github_1.context.repo.owner,
             repo: github_1.context.repo.repo,
@@ -76,26 +62,9 @@ const http_status_codes_1 = __nccwpck_require__(2828);
 const allModules_1 = __nccwpck_require__(1186);
 const utils_1 = __nccwpck_require__(918);
 function getChangedModules(token) {
-    var _a, _b, _c, _d;
     return __awaiter(this, void 0, void 0, function* () {
         const octokit = github_1.getOctokit(token);
-        let base;
-        let head;
-        switch (github_1.context.eventName) {
-            case 'pull_request':
-                base = (_b = (_a = github_1.context.payload.pull_request) === null || _a === void 0 ? void 0 : _a.base) === null || _b === void 0 ? void 0 : _b.sha;
-                head = (_d = (_c = github_1.context.payload.pull_request) === null || _c === void 0 ? void 0 : _c.head) === null || _d === void 0 ? void 0 : _d.sha;
-                break;
-            case 'push':
-                base = github_1.context.payload.before;
-                head = github_1.context.payload.after;
-                break;
-            default:
-                throw new Error(`Unsupported event: ${github_1.context.eventName}`);
-        }
-        if (!base || !head) {
-            throw new Error('Refs not found');
-        }
+        const { base, head } = yield utils_1.getSha(token);
         const response = yield octokit.rest.repos.compareCommits({
             base,
             head,
@@ -200,12 +169,67 @@ run();
 /***/ }),
 
 /***/ 918:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getModulePaths = void 0;
+exports.getModulePaths = exports.getSha = void 0;
+const github_1 = __nccwpck_require__(5438);
+function getSha(token) {
+    var _a, _b, _c, _d;
+    return __awaiter(this, void 0, void 0, function* () {
+        const octokit = github_1.getOctokit(token);
+        let base;
+        let head;
+        switch (github_1.context.eventName) {
+            case 'pull_request': {
+                const payload = github_1.context.payload;
+                base = (_b = (_a = payload.pull_request) === null || _a === void 0 ? void 0 : _a.base) === null || _b === void 0 ? void 0 : _b.sha;
+                head = (_d = (_c = payload.pull_request) === null || _c === void 0 ? void 0 : _c.head) === null || _d === void 0 ? void 0 : _d.sha;
+                break;
+            }
+            case 'push': {
+                const payload = github_1.context.payload;
+                base = payload.before;
+                head = payload.after;
+                break;
+            }
+            case 'workflow_dispatch': {
+                const payload = github_1.context.payload;
+                const ref = yield octokit.rest.git.getRef({
+                    owner: github_1.context.repo.owner,
+                    repo: github_1.context.repo.repo,
+                    ref: payload.ref,
+                });
+                const commit = yield octokit.rest.git.getCommit({
+                    owner: github_1.context.repo.owner,
+                    repo: github_1.context.repo.repo,
+                    commit_sha: ref.data.object.sha,
+                });
+                base = commit.data.parents[0].sha;
+                head = commit.data.sha;
+                break;
+            }
+            default:
+                throw new Error(`Unsupported event: ${github_1.context.eventName}`);
+        }
+        if (!base || !head) {
+            throw new Error('Refs not found');
+        }
+        return { base, head };
+    });
+}
+exports.getSha = getSha;
 function getModulePaths(files, pathProp) {
     const result = files === null || files === void 0 ? void 0 : files.reduce((paths, file) => {
         const path = file[pathProp];
