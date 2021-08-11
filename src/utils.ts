@@ -32,7 +32,7 @@ export async function getSha(
       const ref = await octokit.rest.git.getRef({
         owner: context.repo.owner,
         repo: context.repo.repo,
-        ref: payload.ref,
+        ref: payload.ref.replace('refs/', ''),
       })
 
       const commit = await octokit.rest.git.getCommit({

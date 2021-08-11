@@ -209,7 +209,7 @@ function getSha(token) {
                 const ref = yield octokit.rest.git.getRef({
                     owner: github_1.context.repo.owner,
                     repo: github_1.context.repo.repo,
-                    ref: payload.ref,
+                    ref: payload.ref.replace('refs/', ''),
                 });
                 const commit = yield octokit.rest.git.getCommit({
                     owner: github_1.context.repo.owner,
