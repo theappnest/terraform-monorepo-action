@@ -19,7 +19,7 @@ export async function getChangedModules(token: string): Promise<string[]> {
     throw new Error(getReasonPhrase(response.status))
   }
 
-  if (response.data.status !== 'ahead') {
+  if (response.data.status === 'behind') {
     throw new Error(`HEAD ${response.data.status}`)
   }
 
