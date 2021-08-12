@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.4.1](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.4.0...v1.4.1) (2021-08-12)
+
+
+### Bug Fixes
+
+* fails on diverged head ([#31](https://www.github.com/theappnest/terraform-monorepo-action/issues/31)) ([eb4827e](https://www.github.com/theappnest/terraform-monorepo-action/commit/eb4827ea51420615a63ac042282400013b3d09b1))
+* get ref on workflow_dispatch ([#33](https://www.github.com/theappnest/terraform-monorepo-action/issues/33)) ([b8a642e](https://www.github.com/theappnest/terraform-monorepo-action/commit/b8a642e612eb015d8c5cefcedf664cf1f75bf1ed))
+
 ## [1.4.0](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.3.0...v1.4.0) (2021-08-06)
 
 
