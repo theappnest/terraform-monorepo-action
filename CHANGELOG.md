@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.4.1...v1.5.0) (2021-08-18)
+
+
+### Features
+
+* return modules where lock file changed ([#40](https://www.github.com/theappnest/terraform-monorepo-action/issues/40)) ([1b38d4a](https://www.github.com/theappnest/terraform-monorepo-action/commit/1b38d4a388349919c6054662f118f41cf1f5e8b1))
+
 ### [1.4.1](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.4.0...v1.4.1) (2021-08-12)
 
 
