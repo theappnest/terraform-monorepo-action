@@ -1,3 +1,4 @@
+import { basename } from 'path'
 import { context, getOctokit } from '@actions/github'
 import {
   PullRequestEvent,
@@ -62,7 +63,7 @@ export function getModulePaths<T extends Record<string, unknown>>(
 ): string[] {
   const result = files?.reduce<string[]>((paths, file) => {
     const path = file[pathProp] as string
-    if (path.endsWith('.tf')) {
+    if (path.endsWith('.tf') || basename(path) === '.terraform.lock.hcl') {
       paths.push(path.substring(0, path.lastIndexOf('/')))
     }
     return paths
