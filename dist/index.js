@@ -184,6 +184,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getModulePaths = exports.getSha = void 0;
+const path_1 = __nccwpck_require__(5622);
 const github_1 = __nccwpck_require__(5438);
 function getSha(token) {
     var _a, _b, _c, _d;
@@ -233,7 +234,7 @@ exports.getSha = getSha;
 function getModulePaths(files, pathProp) {
     const result = files === null || files === void 0 ? void 0 : files.reduce((paths, file) => {
         const path = file[pathProp];
-        if (path.endsWith('.tf')) {
+        if (path.endsWith('.tf') || path_1.basename(path) === 'terraform.lock.hcl') {
             paths.push(path.substring(0, path.lastIndexOf('/')));
         }
         return paths;
