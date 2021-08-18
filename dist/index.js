@@ -233,9 +233,9 @@ function getSha(token) {
 exports.getSha = getSha;
 function getModulePaths(files, pathProp) {
     const result = files === null || files === void 0 ? void 0 : files.reduce((paths, file) => {
-        const path = file[pathProp];
-        if (path.endsWith('.tf') || path_1.basename(path) === '.terraform.lock.hcl') {
-            paths.push(path.substring(0, path.lastIndexOf('/')));
+        const { dir, base, ext } = path_1.parse(file[pathProp]);
+        if (ext === '.tf' || base === '.terraform.lock.hcl') {
+            paths.push(dir);
         }
         return paths;
     }, []);
