@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.5.0...v1.6.0) (2021-08-20)
+
+
+### Features
+
+* support pull_request_target ([#43](https://www.github.com/theappnest/terraform-monorepo-action/issues/43)) ([7361ffd](https://www.github.com/theappnest/terraform-monorepo-action/commit/7361ffdd1447c54b0f2229c7bb13cfea773fa3cc))
+
 ## [1.5.0](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.4.1...v1.5.0) (2021-08-18)
 
 
