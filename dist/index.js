@@ -193,6 +193,7 @@ function getSha(token) {
         let base;
         let head;
         switch (github_1.context.eventName) {
+            case 'pull_request_target':
             case 'pull_request': {
                 const payload = github_1.context.payload;
                 base = (_b = (_a = payload.pull_request) === null || _a === void 0 ? void 0 : _a.base) === null || _b === void 0 ? void 0 : _b.sha;

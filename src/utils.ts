@@ -15,6 +15,7 @@ export async function getSha(
   let head: string | undefined
 
   switch (context.eventName) {
+    case 'pull_request_target':
     case 'pull_request': {
       const payload = context.payload as PullRequestEvent
       base = payload.pull_request?.base?.sha
