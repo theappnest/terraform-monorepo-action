@@ -14,7 +14,7 @@
     "ignore": "^5.1.8"
   },
   "devDependencies": {
-    "@octokit/webhooks-types": "^4.3.0",
+    "@octokit/webhooks-types": "^4.3.1",
     "@types/node": "^16.7.4",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.3",
