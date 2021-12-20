@@ -3,7 +3,7 @@ import { context, getOctokit } from '@actions/github'
 import {
   PullRequestEvent,
   PushEvent,
-  WorkflowDispatchEvent,
+  WorkflowDispatchEvent
 } from '@octokit/webhooks-types'
 
 export async function getSha(
@@ -29,6 +29,25 @@ export async function getSha(
       break
     }
     case 'workflow_dispatch': {
+      const payload = context.payload as WorkflowDispatchEvent
+
+      const ref = await octokit.rest.git.getRef({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        ref: payload.ref.replace('refs/', ''),
+      })
+
+      const commit = await octokit.rest.git.getCommit({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        commit_sha: ref.data.object.sha,
+      })
+
+      base = commit.data.parents[0].sha
+      head = commit.data.sha
+      break
+    }
+    case 'schedule': {
       const payload = context.payload as WorkflowDispatchEvent
 
       const ref = await octokit.rest.git.getRef({

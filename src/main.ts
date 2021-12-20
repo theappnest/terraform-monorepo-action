@@ -36,7 +36,7 @@ async function run(): Promise<void> {
     }
 
     core.setOutput('modules', modules)
-  } catch (error) {
+  } catch (error: any) {
     core.setFailed(error.message)
   }
 }
