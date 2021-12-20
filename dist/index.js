@@ -222,6 +222,22 @@ function getSha(token) {
                 head = commit.data.sha;
                 break;
             }
+            case 'schedule': {
+                const payload = github_1.context.payload;
+                const ref = yield octokit.rest.git.getRef({
+                    owner: github_1.context.repo.owner,
+                    repo: github_1.context.repo.repo,
+                    ref: payload.ref.replace('refs/', ''),
+                });
+                const commit = yield octokit.rest.git.getCommit({
+                    owner: github_1.context.repo.owner,
+                    repo: github_1.context.repo.repo,
+                    commit_sha: ref.data.object.sha,
+                });
+                base = commit.data.parents[0].sha;
+                head = commit.data.sha;
+                break;
+            }
             default:
                 throw new Error(`Unsupported event: ${github_1.context.eventName}`);
         }
