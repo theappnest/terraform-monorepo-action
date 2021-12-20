@@ -3,7 +3,7 @@ import { context, getOctokit } from '@actions/github'
 import {
   PullRequestEvent,
   PushEvent,
-  WorkflowDispatchEvent
+  WorkflowDispatchEvent,
 } from '@octokit/webhooks-types'
 
 export async function getSha(
