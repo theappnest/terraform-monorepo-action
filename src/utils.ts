@@ -64,7 +64,12 @@ export function getModulePaths<T extends Record<string, unknown>>(
 ): string[] {
   const result = files?.reduce<string[]>((paths, file) => {
     const { dir, base, ext } = parse(file[pathProp] as string)
-    if (ext === '.tf' || base === '.terraform.lock.hcl' || ext === '.yaml' || ext === '.tpl') {
+    if (
+      ext === '.tf' ||
+      base === '.terraform.lock.hcl' ||
+      ext === '.yaml' ||
+      ext === '.tpl'
+    ) {
       paths.push(dir)
     }
     return paths
