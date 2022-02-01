@@ -235,11 +235,11 @@ exports.getSha = getSha;
 function getModulePaths(files, pathProp) {
     const result = files === null || files === void 0 ? void 0 : files.reduce((paths, file) => {
         const { dir, base, ext } = path_1.parse(file[pathProp]);
-        if (ext === '.tf' ||
-            base === '.terraform.lock.hcl' ||
-            ext === '.yaml' ||
-            ext === '.tpl') {
+        if (ext === '.tf' || base === '.terraform.lock.hcl') {
             paths.push(dir);
+        }
+        else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
+            paths.push(dir.split('/').at(-2));
         }
         return paths;
     }, []);
