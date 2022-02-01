@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.7.2](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.7.1...v1.7.2) (2022-02-01)
+
+
+### Bug Fixes
+
+* cant use .split on non string ([5837281](https://www.github.com/theappnest/terraform-monorepo-action/commit/583728176bc784a7c7ef9f4a8d0fc11fd70234be))
+* cant use .split on non string ([#111](https://www.github.com/theappnest/terraform-monorepo-action/issues/111)) ([0430e24](https://www.github.com/theappnest/terraform-monorepo-action/commit/0430e24ec2e51d91c292ed4f6f6dc78c091e9d71))
+
 ### [1.7.1](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.7.0...v1.7.1) (2022-02-01)
 
 
