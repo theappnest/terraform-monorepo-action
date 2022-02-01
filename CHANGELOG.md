@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.7.1](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.7.0...v1.7.1) (2022-02-01)
+
+
+### Bug Fixes
+
+* return path before yaml or tpl to get changed module ([#109](https://www.github.com/theappnest/terraform-monorepo-action/issues/109)) ([db3a026](https://www.github.com/theappnest/terraform-monorepo-action/commit/db3a026dde31107e68c3ee7baeaba21670595243))
+
 ## [1.7.0](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.6.0...v1.7.0) (2022-02-01)
 
 
