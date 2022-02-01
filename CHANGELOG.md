@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.6.0...v1.7.0) (2022-02-01)
+
+
+### Features
+
+* support file paths with .yaml and .tpl extensions ([#96](https://www.github.com/theappnest/terraform-monorepo-action/issues/96)) ([8811efa](https://www.github.com/theappnest/terraform-monorepo-action/commit/8811efa10ba6a991384756d97011e14afc33db07))
+
 ## [1.6.0](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.5.0...v1.6.0) (2021-08-20)
 
 
