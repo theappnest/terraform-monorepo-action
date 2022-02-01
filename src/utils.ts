@@ -67,7 +67,7 @@ export function getModulePaths<T extends Record<string, unknown>>(
     if (ext === '.tf' || base === '.terraform.lock.hcl') {
       paths.push(dir)
     } else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
-      paths.push(dir.toString().split('/').at(-2)!)
+      paths.push(dir.split('/').at(-2)!)
     }
     return paths
   }, [])
