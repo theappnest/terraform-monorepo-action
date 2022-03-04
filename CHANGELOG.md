@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.7.3](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.7.2...v1.7.3) (2022-03-04)
+
+
+### Bug Fixes
+
+* resolve path gathering for templated files ([#119](https://www.github.com/theappnest/terraform-monorepo-action/issues/119)) ([d0776ee](https://www.github.com/theappnest/terraform-monorepo-action/commit/d0776ee14699f0fe94579b5c9ba62be02d0476c4))
+
 ### [1.7.2](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.7.1...v1.7.2) (2022-02-01)
 
 
