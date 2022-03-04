@@ -1,4 +1,4 @@
-import { parse } from 'path'
+import { parse, resolve } from 'path'
 import { context, getOctokit } from '@actions/github'
 import {
   PullRequestEvent,
@@ -67,7 +67,7 @@ export function getModulePaths<T extends Record<string, unknown>>(
     if (ext === '.tf' || base === '.terraform.lock.hcl') {
       paths.push(dir)
     } else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
-      paths.push(path.resolve(dir, '..'))
+      paths.push(resolve(dir, '..'))
     }
     return paths
   }, [])
