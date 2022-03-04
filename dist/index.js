@@ -239,7 +239,9 @@ function getModulePaths(files, pathProp) {
             paths.push(dir);
         }
         else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
-            paths.push(path_1.resolve(dir, '..'));
+            const splitPath = dir.split('/');
+            splitPath.pop();
+            paths.push(splitPath.join('/'));
         }
         return paths;
     }, []);
