@@ -68,6 +68,7 @@ export function getModulePaths<T extends Record<string, unknown>>(
       paths.push(dir)
     } else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
       paths.push(resolve(dir, '..'))
+      console.log("Returning resolve ..")
     }
     return paths
   }, [])

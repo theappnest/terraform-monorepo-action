@@ -24,6 +24,7 @@ export async function getChangedModules(token: string): Promise<string[]> {
   }
 
   const changedModules = getModulePaths(response.data.files, 'filename')
+  console.log("Changed modules done")
   const allModules = await getAllModules(token)
 
   // filter to exclude deleted modules
