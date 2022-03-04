@@ -25,9 +25,9 @@ async function run(): Promise<void> {
     }
 
     if (ignored) {
-      core.info("Checking ignored")
       const globs = ignored.split('\n').map((item) => item.trim())
-      core.info("Globs done")
+      core.info(globs.toString())
+      core.info(modules.toString())
       modules = ignore().add(globs).filter(modules)
       core.info("Modules ignored")
     }

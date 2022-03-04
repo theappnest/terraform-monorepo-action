@@ -147,9 +147,9 @@ function run() {
                     throw new Error(`Unknown mode: ${mode}`);
             }
             if (ignored) {
-                core.info("Checking ignored");
                 const globs = ignored.split('\n').map((item) => item.trim());
-                core.info("Globs done");
+                core.info(globs.toString());
+                core.info(modules.toString());
                 modules = ignore_1.default().add(globs).filter(modules);
                 core.info("Modules ignored");
             }
