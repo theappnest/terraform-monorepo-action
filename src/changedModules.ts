@@ -2,6 +2,8 @@ import { context, getOctokit } from '@actions/github'
 import { getReasonPhrase } from 'http-status-codes'
 import { getAllModules } from './allModules'
 import { getModulePaths, getSha } from './utils'
+import * as core from '@actions/core'
+
 
 export async function getChangedModules(token: string): Promise<string[]> {
   const octokit = getOctokit(token)
@@ -24,7 +26,7 @@ export async function getChangedModules(token: string): Promise<string[]> {
   }
 
   const changedModules = getModulePaths(response.data.files, 'filename')
-  console.log("Changed modules done")
+  core.info("Changed modules done")
   const allModules = await getAllModules(token)
 
   // filter to exclude deleted modules

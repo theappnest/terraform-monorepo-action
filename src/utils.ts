@@ -5,6 +5,8 @@ import {
   PushEvent,
   WorkflowDispatchEvent,
 } from '@octokit/webhooks-types'
+import * as core from '@actions/core'
+
 
 export async function getSha(
   token: string,
@@ -68,7 +70,7 @@ export function getModulePaths<T extends Record<string, unknown>>(
       paths.push(dir)
     } else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
       paths.push(resolve(dir, '..'))
-      console.log("Returning resolve ..")
+      core.info("Returning resolve ..")
     }
     return paths
   }, [])
