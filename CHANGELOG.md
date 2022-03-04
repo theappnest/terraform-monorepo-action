@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.7.4](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.7.3...v1.7.4) (2022-03-04)
+
+
+### Bug Fixes
+
+* make sure we pass along a relative file path ([#123](https://www.github.com/theappnest/terraform-monorepo-action/issues/123)) ([652fae3](https://www.github.com/theappnest/terraform-monorepo-action/commit/652fae3b122831af7f372e9d7ae30a83277baf65))
+
 ### [1.7.3](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.7.2...v1.7.3) (2022-03-04)
 
 
