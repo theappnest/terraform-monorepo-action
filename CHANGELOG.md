@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.7.5](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.7.4...v1.7.5) (2022-04-05)
+
+
+### Bug Fixes
+
+* ignore github ci and terraform directories ([#132](https://www.github.com/theappnest/terraform-monorepo-action/issues/132)) ([c8eaca6](https://www.github.com/theappnest/terraform-monorepo-action/commit/c8eaca688c1b8993926e0374cc738bc4a459f3d5))
+
 ### [1.7.4](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.7.3...v1.7.4) (2022-03-04)
 
 
