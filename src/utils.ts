@@ -64,11 +64,16 @@ export function getModulePaths<T extends Record<string, unknown>>(
 ): string[] {
   const result = files?.reduce<string[]>((paths, file) => {
     const { dir, base, ext } = parse(file[pathProp] as string)
-    const globalIgnore = ['.github', '.ci', '.terraform']
+    // const globalIgnore = ['.github', '.ci', '.terraform']
 
-    if (dir.includes('.github') || dir.includes('.ci') || dir.includes('.terraform')) {
+    if (
+      dir.includes('.github') ||
+      dir.includes('.ci') ||
+      dir.includes('.terraform')
+    ) {
       return paths
-    } else if (ext === '.tf' || base === '.terraform.lock.hcl') {
+    }
+    if (ext === '.tf' || base === '.terraform.lock.hcl') {
       paths.push(dir)
     } else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
       const splitPath = dir.split('/')
