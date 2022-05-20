@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.7.6](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.7.5...v1.7.6) (2022-05-20)
+
+
+### Bug Fixes
+
+* do not return empty strings as paths ([#140](https://www.github.com/theappnest/terraform-monorepo-action/issues/140)) ([f6fa676](https://www.github.com/theappnest/terraform-monorepo-action/commit/f6fa6769d400a77211cf2cb5758fb155789803e8))
+
 ### [1.7.5](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.7.4...v1.7.5) (2022-04-05)
 
 
