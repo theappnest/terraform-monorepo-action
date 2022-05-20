@@ -78,7 +78,9 @@ export function getModulePaths<T extends Record<string, unknown>>(
     } else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
       const splitPath = dir.split('/')
       splitPath.pop()
-      paths.push(splitPath.join('/'))
+      if (splitPath !== '') {
+        paths.push(splitPath.join('/'))
+      }
     }
     return paths
   }, [])
