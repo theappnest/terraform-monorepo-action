@@ -247,7 +247,10 @@ function getModulePaths(files, pathProp) {
         else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
             const splitPath = dir.split('/');
             splitPath.pop();
-            paths.push(splitPath.join('/'));
+            // Do not return root directory as module
+            if (dir !== '') {
+                paths.push(splitPath.join('/'));
+            }
         }
         return paths;
     }, []);
