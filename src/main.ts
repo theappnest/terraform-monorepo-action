@@ -6,7 +6,7 @@ import { getChangedModules } from './changedModules'
 async function run(): Promise<void> {
   core.debug('hello')
   try {
-    const token = core.g
+    const token = core.getInput('token', { required: true })
     const mode = core.getInput('mode', { required: true })
     const ignored = core.getInput('ignore')
 
