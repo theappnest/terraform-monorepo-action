@@ -262,18 +262,19 @@ function getModulePaths(files, pathProp) {
             dir.includes('.terraform')) {
             return paths;
         }
-        core.debug(dir + base + ext);
+        core.debug(`${dir} / ${base} / ${ext}`);
         if (ext === '.tf' || base === '.terraform.lock.hcl') {
-            core.debug('in 1st');
+            core.debug(`1st pushed ${dir}`);
             paths.push(dir);
         }
         else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
-            core.debug('in 2nd');
             const splitPath = dir.split('/');
             splitPath.pop();
             // Do not return root directory as module
             if (dir !== '') {
-                paths.push(splitPath.join('/'));
+                const spl = splitPath.join('/');
+                core.debug(`2nd pushed ${spl}`);
+                paths.push(spl);
             }
         }
         return paths;
