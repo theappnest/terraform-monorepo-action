@@ -1,6 +1,6 @@
 {
   "name": "terraform-monorepo-action",
-  "version": "1.7.6",
+  "version": "2.0.0",
   "private": true,
   "main": "lib/main.js",
   "scripts": {
