@@ -74,7 +74,7 @@ export function getModulePaths<T extends Record<string, unknown>>(
     ) {
       return paths
     }
-    core.debug(dir, base, ext)
+    core.debug(dir + base + ext)
     if (ext === '.tf' || base === '.terraform.lock.hcl') {
       core.debug('in 1st')
       paths.push(dir)
