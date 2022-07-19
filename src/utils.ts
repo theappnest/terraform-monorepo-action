@@ -73,9 +73,12 @@ export function getModulePaths<T extends Record<string, unknown>>(
     ) {
       return paths
     }
+    console.log(file)
     if (ext === '.tf' || base === '.terraform.lock.hcl') {
+      console.log('in 1st')
       paths.push(dir)
     } else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
+      console.log('in 2nd')
       const splitPath = dir.split('/')
       splitPath.pop()
       // Do not return root directory as module
