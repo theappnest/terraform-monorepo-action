@@ -18,4 +18,4 @@ outputs:
     description: An array of paths to Terraform modules.
 runs:
   using: 'node12'
-  main: 'src/main.js'
+  main: 'dist/index.js'
