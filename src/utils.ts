@@ -76,7 +76,7 @@ export function getModulePaths<T extends Record<string, unknown>>(
     }
     core.debug(`${dir} / ${base} / ${ext}`)
     if (ext === '.tf' || base === '.terraform.lock.hcl') {
-      core.debug('1st pushed ' + dir)
+      core.debug(`1st pushed ${dir}`)
       paths.push(dir)
     } else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
       const splitPath = dir.split('/')
@@ -84,7 +84,7 @@ export function getModulePaths<T extends Record<string, unknown>>(
       // Do not return root directory as module
       if (dir !== '') {
         const spl = splitPath.join('/')
-        core.debug('2nd pushed ' + spl)
+        core.debug(`2nd pushed ${spl}`)
         paths.push(spl)
       }
     }
