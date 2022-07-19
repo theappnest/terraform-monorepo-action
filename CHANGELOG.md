@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/theappnest/terraform-monorepo-action/compare/v1.7.6...v2.0.0) (2022-07-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove detection of yaml and tpl files (#155)
+
+### Miscellaneous Chores
+
+* remove detection of yaml and tpl files ([#155](https://github.com/theappnest/terraform-monorepo-action/issues/155)) ([0847e83](https://github.com/theappnest/terraform-monorepo-action/commit/0847e83ddbdc16db2a0ff5dcbd60a1855c66ddca))
+
 ### [1.7.6](https://www.github.com/theappnest/terraform-monorepo-action/compare/v1.7.5...v1.7.6) (2022-05-20)
 
 
