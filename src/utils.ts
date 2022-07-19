@@ -1,4 +1,5 @@
 import { parse } from 'path'
+import * as core from '@actions/core'
 import { context, getOctokit } from '@actions/github'
 import {
   PullRequestEvent,
@@ -73,12 +74,12 @@ export function getModulePaths<T extends Record<string, unknown>>(
     ) {
       return paths
     }
-    console.log(file)
+    core.debug(file)
     if (ext === '.tf' || base === '.terraform.lock.hcl') {
-      console.log('in 1st')
+      core.debug('in 1st')
       paths.push(dir)
     } else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
-      console.log('in 2nd')
+      core.debug('in 2nd')
       const splitPath = dir.split('/')
       splitPath.pop()
       // Do not return root directory as module
