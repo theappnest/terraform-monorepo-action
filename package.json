@@ -10,7 +10,7 @@
   "dependencies": {
     "@actions/core": "^1.5.0",
     "@actions/github": "^5.0.0",
-    "http-status-codes": "^2.1.4",
+    "http-status-codes": "^2.2.0",
     "ignore": "^5.1.8"
   },
   "devDependencies": {
