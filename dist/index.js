@@ -244,14 +244,6 @@ function getModulePaths(files, pathProp) {
         if (ext === '.tf' || base === '.terraform.lock.hcl') {
             paths.push(dir);
         }
-        else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
-            const splitPath = dir.split('/');
-            splitPath.pop();
-            // Do not return root directory as module
-            if (dir !== '') {
-                paths.push(splitPath.join('/'));
-            }
-        }
         return paths;
     }, []);
     return Array.from(new Set(result));
