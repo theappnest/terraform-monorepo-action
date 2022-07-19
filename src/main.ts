@@ -4,6 +4,7 @@ import { getAllModules } from './allModules'
 import { getChangedModules } from './changedModules'
 
 async function run(): Promise<void> {
+  core.debug('hello')
   try {
     const token = core.getInput('token', { required: true })
     const mode = core.getInput('mode', { required: true })
