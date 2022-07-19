@@ -131,6 +131,7 @@ const allModules_1 = __nccwpck_require__(1186);
 const changedModules_1 = __nccwpck_require__(1013);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
+        core.debug('hello');
         try {
             const token = core.getInput('token', { required: true });
             const mode = core.getInput('mode', { required: true });
@@ -173,6 +174,25 @@ run();
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -185,6 +205,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getModulePaths = exports.getSha = void 0;
 const path_1 = __nccwpck_require__(5622);
+const core = __importStar(__nccwpck_require__(2186));
 const github_1 = __nccwpck_require__(5438);
 function getSha(token) {
     var _a, _b, _c, _d;
@@ -241,10 +262,13 @@ function getModulePaths(files, pathProp) {
             dir.includes('.terraform')) {
             return paths;
         }
+        core.debug(dir + base + ext);
         if (ext === '.tf' || base === '.terraform.lock.hcl') {
+            core.debug('in 1st');
             paths.push(dir);
         }
         else if (ext.match(/ya?ml/) !== null || ext === '.tpl') {
+            core.debug('in 2nd');
             const splitPath = dir.split('/');
             splitPath.pop();
             // Do not return root directory as module
